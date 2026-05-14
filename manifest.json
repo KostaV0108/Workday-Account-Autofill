@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "Workday Autofill",
+  "version": "1.0",
+  "description": "Auto-fills email and password on Workday account creation",
+  "permissions": ["activeTab", "storage"],
+  "content_scripts": [
+    {
+      "matches": ["*://*.myworkday.com/*", "*://*.myworkdayjobs.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
