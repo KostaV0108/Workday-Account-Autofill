@@ -2,19 +2,50 @@
 <html>
 <head>
   <style>
-    body { font-family: sans-serif; padding: 12px; width: 240px; }
-    input { width: 100%; margin: 4px 0 10px; padding: 6px; box-sizing: border-box; }
+    body { font-family: sans-serif; padding: 12px; width: 260px; }
+    label { font-size: 11px; color: #555; }
+    input { width: 100%; margin: 2px 0 8px; padding: 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
     button { width: 100%; padding: 8px; background: #0066cc; color: white; border: none; cursor: pointer; border-radius: 4px; }
+    h3 { margin: 0 0 10px; }
+    .section { font-weight: bold; font-size: 12px; margin: 10px 0 4px; color: #333; border-bottom: 1px solid #eee; padding-bottom: 2px; }
   </style>
 </head>
 <body>
   <h3>Workday Autofill</h3>
+
+  <div class="section">Account</div>
   <label>Email</label>
   <input type="email" id="email" placeholder="you@example.com" />
   <label>Password</label>
-  <input type="password" id="password" placeholder="Your password" />
-  <button id="save">Save Credentials</button>
-  <p id="status" style="color: green; font-size: 12px;"></p>
+  <input type="password" id="password" />
+
+  <div class="section">Name</div>
+  <label>First Name</label>
+  <input type="text" id="firstName" />
+  <label>Last Name</label>
+  <input type="text" id="lastName" />
+
+  <div class="section">Address</div>
+  <label>Country</label>
+  <input type="text" id="country" placeholder="e.g. Canada" />
+  <label>Address Line 1</label>
+  <input type="text" id="addressLine1" />
+  <label>City</label>
+  <input type="text" id="city" />
+  <label>Province / Territory</label>
+  <input type="text" id="province" placeholder="e.g. Ontario" />
+  <label>Postal Code</label>
+  <input type="text" id="postalCode" placeholder="e.g. K1A 0A6" />
+
+  <div class="section">Phone</div>
+  <label>Phone Number</label>
+  <input type="text" id="phoneNumber" placeholder="e.g. 6135550100" />
+  <label>Is this a mobile device?</label>
+  <input type="text" id="mobileDevice" placeholder="yes or no" />
+
+  <br/>
+  <button id="save">Save</button>
+  <p id="status" style="color: green; font-size: 12px; margin-top: 6px;"></p>
 
   <script src="popup.js"></script>
 </body>
