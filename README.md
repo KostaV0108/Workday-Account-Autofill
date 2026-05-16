@@ -23,6 +23,7 @@ May be updated with more inputs to make workday applications easier since they t
 - Works on `*.myworkday.com` and `*.myworkdayjobs.com`
 - If fields don't fill, open DevTools → Console and check for `[Autofill]` logs
 - Some things are not fully implemented yet such as skills and education. 
+- Also kinda specific to Canada but that's to be changed a little later.
 
 - If you think a field is fillable then paste this command into the console to see what the fields are. If `data-automation-id:` has something then it may be automated. If not then tough luck.
 
