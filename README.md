@@ -22,6 +22,7 @@ May be updated with more inputs to make workday applications easier since they t
 - Information is stored locally on your machine via `chrome.storage.local`
 - Works on `*.myworkday.com` and `*.myworkdayjobs.com`
 - If fields don't fill, open DevTools → Console and check for `[Autofill]` logs
+- Some things are not fully implemented yet such as skills and education. 
 
 - If you think a field is fillable then paste this command into the console to see what the fields are. If `data-automation-id:` has something then it may be automated. If not then tough luck.
 
