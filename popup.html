@@ -1,51 +1,308 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8" />
   <style>
-    body { font-family: sans-serif; padding: 12px; width: 260px; }
-    label { font-size: 11px; color: #555; }
-    input { width: 100%; margin: 2px 0 8px; padding: 6px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
-    button { width: 100%; padding: 8px; background: #0066cc; color: white; border: none; cursor: pointer; border-radius: 4px; }
-    h3 { margin: 0 0 10px; }
-    .section { font-weight: bold; font-size: 12px; margin: 10px 0 4px; color: #333; border-bottom: 1px solid #eee; padding-bottom: 2px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      width: 300px;
+      background: #0f1117;
+      color: #e2e8f0;
+      font-size: 12px;
+    }
+
+    .header {
+      padding: 14px 16px 12px;
+      background: #1a1d27;
+      border-bottom: 1px solid #2d3148;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-dot {
+      width: 8px; height: 8px;
+      background: #4f7cff;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #4f7cff;
+    }
+
+    .header h1 {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.3px;
+    }
+
+    .header span {
+      font-size: 10px;
+      color: #555e7a;
+      margin-left: auto;
+    }
+
+    /* Accordion */
+    .section { border-bottom: 1px solid #1e2235; }
+
+    .section-toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 11px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      color: #c4cde0;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      text-align: left;
+      transition: background 0.15s;
+    }
+
+    .section-toggle:hover { background: #161824; }
+
+    .section-toggle .icon {
+      font-size: 13px;
+      opacity: 0.7;
+    }
+
+    .section-toggle .chevron {
+      margin-left: auto;
+      font-size: 10px;
+      transition: transform 0.2s;
+      color: #555e7a;
+    }
+
+    .section-toggle.open .chevron { transform: rotate(180deg); }
+
+    .section-body {
+      display: none;
+      padding: 4px 16px 14px;
+      background: #0d0f1a;
+    }
+
+    .section-body.open { display: block; }
+
+    label {
+      display: block;
+      color: #6b7494;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-top: 10px;
+      margin-bottom: 3px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    textarea {
+      width: 100%;
+      background: #13162000;
+      border: 1px solid #252840;
+      border-radius: 5px;
+      padding: 7px 9px;
+      color: #e2e8f0;
+      font-size: 12px;
+      outline: none;
+      transition: border-color 0.15s;
+      font-family: inherit;
+    }
+
+    input:focus, textarea:focus {
+      border-color: #4f7cff;
+      background: #131620;
+    }
+
+    textarea { resize: vertical; min-height: 60px; }
+
+    .row { display: flex; gap: 8px; }
+    .row > div { flex: 1; }
+
+    .save-bar {
+      padding: 12px 16px;
+      background: #1a1d27;
+      border-top: 1px solid #2d3148;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    button#save {
+      flex: 1;
+      padding: 8px;
+      background: #4f7cff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    button#save:hover { background: #3a63e0; }
+
+    #status {
+      font-size: 11px;
+      color: #4ade80;
+      min-width: 50px;
+    }
   </style>
 </head>
 <body>
-  <h3>Workday Autofill</h3>
 
-  <div class="section">Account</div>
-  <label>Email</label>
-  <input type="email" id="email" placeholder="you@example.com" />
-  <label>Password</label>
-  <input type="password" id="password" />
+  <div class="header">
+    <div class="header-dot"></div>
+    <h1>Workday Autofill</h1>
+    <span>v1.0</span>
+  </div>
 
-  <div class="section">Name</div>
-  <label>First Name</label>
-  <input type="text" id="firstName" />
-  <label>Last Name</label>
-  <input type="text" id="lastName" />
+  <!-- ACCOUNT -->
+  <div class="section">
+    <button class="section-toggle" data-target="account">
+      <span class="icon">🔐</span> Account
+      <span class="chevron">▼</span>
+    </button>
+    <div class="section-body" id="account">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="you@example.com" />
+      <label>Password</label>
+      <input type="password" id="password" />
+    </div>
+  </div>
 
-  <div class="section">Address</div>
-  <label>Country</label>
-  <input type="text" id="country" placeholder="e.g. Canada" />
-  <label>Address Line 1</label>
-  <input type="text" id="addressLine1" />
-  <label>City</label>
-  <input type="text" id="city" />
-  <label>Province / Territory</label>
-  <input type="text" id="province" placeholder="e.g. Ontario" />
-  <label>Postal Code</label>
-  <input type="text" id="postalCode" placeholder="e.g. K1A 0A6" />
+  <!-- PERSONAL INFO -->
+  <div class="section">
+    <button class="section-toggle" data-target="personal">
+      <span class="icon">👤</span> Personal Info
+      <span class="chevron">▼</span>
+    </button>
+    <div class="section-body" id="personal">
+      <div class="row">
+        <div>
+          <label>First Name</label>
+          <input type="text" id="firstName" />
+        </div>
+        <div>
+          <label>Last Name</label>
+          <input type="text" id="lastName" />
+        </div>
+      </div>
+      <label>Address Line 1</label>
+      <input type="text" id="addressLine1" />
+      <div class="row">
+        <div>
+          <label>City</label>
+          <input type="text" id="city" />
+        </div>
+        <div>
+          <label>Postal Code</label>
+          <input type="text" id="postalCode" />
+        </div>
+      </div>
+      <label>Province / Territory</label>
+      <input type="text" id="province" placeholder="e.g. Ontario" />
+      <label>Country</label>
+      <input type="text" id="country" placeholder="e.g. Canada" />
+      <label>Phone Number</label>
+      <input type="text" id="phoneNumber" placeholder="e.g. 6135550100" />
+      <label>Mobile Device? (yes/no)</label>
+      <input type="text" id="mobileDevice" placeholder="yes or no" />
+    </div>
+  </div>
 
-  <div class="section">Phone</div>
-  <label>Phone Number</label>
-  <input type="text" id="phoneNumber" placeholder="e.g. 6135550100" />
-  <label>Is this a mobile device?</label>
-  <input type="text" id="mobileDevice" placeholder="yes or no" />
+  <!-- WORK EXPERIENCE -->
+  <div class="section">
+    <button class="section-toggle" data-target="work">
+      <span class="icon">💼</span> Work Experience
+      <span class="chevron">▼</span>
+    </button>
+    <div class="section-body" id="work">
+      <label>Job Title</label>
+      <input type="text" id="jobTitle" />
+      <label>Company Name</label>
+      <input type="text" id="companyName" />
+      <label>Location</label>
+      <input type="text" id="workLocation" />
+      <label>Currently Work Here? (yes/no)</label>
+      <input type="text" id="currentlyWorkHere" placeholder="yes or no" />
+      <div class="row">
+        <div>
+          <label>Start Month</label>
+          <input type="text" id="workStartMonth" placeholder="January" />
+        </div>
+        <div>
+          <label>Start Year</label>
+          <input type="text" id="workStartYear" placeholder="2020" />
+        </div>
+      </div>
+      <div class="row">
+        <div>
+          <label>End Month</label>
+          <input type="text" id="workEndMonth" placeholder="January" />
+        </div>
+        <div>
+          <label>End Year</label>
+          <input type="text" id="workEndYear" placeholder="2024" />
+        </div>
+      </div>
+      <label>Role Description</label>
+      <textarea id="roleDescription" placeholder="Describe your responsibilities..."></textarea>
+    </div>
+  </div>
 
-  <br/>
-  <button id="save">Save</button>
-  <p id="status" style="color: green; font-size: 12px; margin-top: 6px;"></p>
+  <!-- EDUCATION -->
+  <div class="section">
+    <button class="section-toggle" data-target="education">
+      <span class="icon">🎓</span> Education
+      <span class="chevron">▼</span>
+    </button>
+    <div class="section-body" id="education">
+      <label>School Name</label>
+      <input type="text" id="schoolName" />
+      <label>Degree</label>
+      <input type="text" id="degree" placeholder="e.g. Bachelor of Arts" />
+      <label>Field of Study</label>
+      <input type="text" id="fieldOfStudy" />
+      <label>Grade / GPA</label>
+      <input type="text" id="gradeAverage" />
+      <div class="row">
+        <div>
+          <label>Start Year</label>
+          <input type="text" id="eduStartYear" placeholder="2018" />
+        </div>
+        <div>
+          <label>End Year</label>
+          <input type="text" id="eduEndYear" placeholder="2022" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS & OTHER -->
+  <div class="section">
+    <button class="section-toggle" data-target="other">
+      <span class="icon">🔗</span> Skills & Other
+      <span class="chevron">▼</span>
+    </button>
+    <div class="section-body" id="other">
+      <label>Skills (comma separated)</label>
+      <input type="text" id="skills" placeholder="Excel, Python, Communication" />
+      <label>LinkedIn URL</label>
+      <input type="text" id="linkedin" placeholder="https://linkedin.com/in/..." />
+    </div>
+  </div>
+
+  <div class="save-bar">
+    <button id="save">Save All</button>
+    <span id="status"></span>
+  </div>
 
   <script src="popup.js"></script>
 </body>
