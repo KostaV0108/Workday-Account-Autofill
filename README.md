@@ -1,7 +1,7 @@
 # Workday Autofill — Chrome Extension
 
-Using the same email and password for every workday account you make? Yeah same here. What if you didn't though? This autofills your designated email and password everytime you go onto a workday page. Saving you three inputs of time. 
-May be updated with more inputs to make workday applications easier since they tend to ask the same handful of questions. 
+Inputting the same info for every workday application? Yeah same here. What if you didn't though? This chrome extension takes information you were going to put into the application anyway and does it for you by detecting input fields and filling it with the designated information. 
+May be updated with more inputs to make workday applications easier since they tend to ask the same handful of questions. Some are unique unfortunately and cannot be predicted. Although I will try my best.
 
 ## Setup
 
@@ -19,6 +19,6 @@ May be updated with more inputs to make workday applications easier since they t
 
 ## Notes
 
-- Credentials are stored locally on your machine via `chrome.storage.local`
+- Information is stored locally on your machine via `chrome.storage.local`
 - Works on `*.myworkday.com` and `*.myworkdayjobs.com`
 - If fields don't fill, open DevTools → Console and check for `[Autofill]` logs
