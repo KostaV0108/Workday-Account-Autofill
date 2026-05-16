@@ -22,3 +22,31 @@ May be updated with more inputs to make workday applications easier since they t
 - Information is stored locally on your machine via `chrome.storage.local`
 - Works on `*.myworkday.com` and `*.myworkdayjobs.com`
 - If fields don't fill, open DevTools → Console and check for `[Autofill]` logs
+
+- If you think a field is fillable then paste this command into the console to see what the fields are. If `data-automation-id:` has something then it may be automated. If not then tough luck.
+
+```// All inputs
+document.querySelectorAll('input, select, textarea').forEach((el, i) => {
+  console.log(`Field ${i}:`, {
+    tag: el.tagName,
+    type: el.type,
+    id: el.id,
+    'data-automation-id': el.getAttribute('data-automation-id'),
+    placeholder: el.placeholder,
+    label: document.querySelector(`label[for="${el.id}"]`)?.textContent.trim()
+  });
+});
+
+// All buttons
+document.querySelectorAll('button').forEach((el, i) => {
+  console.log(`Button ${i}:`, {
+    text: el.textContent.trim(),
+    'data-automation-id': el.getAttribute('data-automation-id'),
+    class: el.className
+  });
+});
+
+// All headings
+document.querySelectorAll('h1, h2, h3, h4, h5').forEach((el, i) => {
+  console.log(`Heading ${i}:`, el.tagName, '→', el.textContent.trim());
+});```
